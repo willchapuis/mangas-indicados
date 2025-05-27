@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Minhas Indicações</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1>📚 Minhas Indicações de Obras</h1>
+
+    <section class="formulario">
+        <h2>➕ Adicionar nova indicação (manual)</h2>
+        <form method="POST" action="/adicionar">
+            <textarea name="novas_obras" placeholder="Uma obra por linha..." required></textarea>
+            <button type="submit">Adicionar</button>
+        </form>
+    </section>
+
+    <section class="upload-link">
+        <h2>📤 Adicionar via planilha (.xlsx)</h2>
+        <a href="/upload">Ir para upload</a>
+    </section>
+
+    <section class="lista">
+        <h2>📋 Lista de Obras</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Obra</th>
+                    <th>Indicações</th>
+                    <th>Status</th>
+                    <th>Alterar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for nome, info in obras %}
+                <tr>
+                    <td>{{ nome }}</td>
+                    <td>{{ info['indicacoes'] }}</td>
+                    <td>
+                        {% if info['status'] == 'nao_lido' %}
+                            🔴 Não lido
+                        {% elif info['status'] == 'lendo' %}
+                            🟡 Lendo
+                        {% elif info['status'] == 'lido' %}
+                            🟢 Lido
+                        {% else %}
+                            ❓
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form method="POST" action="/atualizar_status/{{ nome }}/nao_lido">
+                            <button>🔴</button>
+                        </form>
+                        <form method="POST" action="/atualizar_status/{{ nome }}/lendo">
+                            <button>🟡</button>
+                        </form>
+                        <form method="POST" action="/atualizar_status/{{ nome }}/lido">
+                            <button>🟢</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

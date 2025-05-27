@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload de Planilha</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1>📤 Enviar Planilha de Indicações</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".xlsx" required>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <p><a href="/">⬅️ Voltar para a lista</a></p>
+</body>
+</html>
