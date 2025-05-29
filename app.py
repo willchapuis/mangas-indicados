@@ -10,9 +10,9 @@ app = Flask(__name__)
 os.makedirs("uploads", exist_ok=True)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
-DADOS_PATH = "data/obras.json"
+DADOS_PATH = "obras.json"
 
-# Carrega ou inicia os dados (dicionário simples)
+# Carrega ou inicia os dados
 def carregar_dados():
     if not os.path.exists(DADOS_PATH):
         with open(DADOS_PATH, "w", encoding="utf-8") as f:
@@ -29,7 +29,6 @@ def salvar_dados(dados):
     with open(DADOS_PATH, 'w', encoding='utf-8') as f:
         json.dump(dados, f, indent=2, ensure_ascii=False)
 
-# Normaliza nomes para comparação
 def normalizar_nome(nome):
     nome = nome.lower().strip()
     nome = nome.replace("***", "").replace("...", "").replace("---", "")
@@ -38,26 +37,25 @@ def normalizar_nome(nome):
     nome = ' '.join(nome.split())  # remove espaços duplos
     return nome
 
-# Adiciona nova indicação (lista de nomes)
-def adicionar_indicacao(nomes, dados):
-    for nome in nomes:
-        nome_original = nome.strip()
-        if not nome_original:
+# Adiciona nova indicação
+def adicionar_indicacao(lista_obras, dados):
+    for obra in lista_obras:
+        obra_original = obra.strip()
+        if not obra_original:
             continue
-        nome_limpo = normalizar_nome(nome_original)
+        obra_normalizada = normalizar_nome(obra_original)
 
         similar = None
         for existente in dados:
-            if fuzz.ratio(nome_limpo, normalizar_nome(existente)) >= 90:
+            if fuzz.ratio(obra_normalizada, normalizar_nome(existente)) >= 90:
                 similar = existente
                 break
 
         if similar:
             dados[similar]['indicacoes'] += 1
         else:
-            dados[nome_original] = {
-                'indicacoes': 1,
-                'status': 'nao_lido'
+            dados[obra_original] = {
+                'indicacoes': 1
             }
     salvar_dados(dados)
 
@@ -66,7 +64,8 @@ def adicionar_indicacao(nomes, dados):
 def index():
     dados = carregar_dados()
     obras = sorted(dados.items(), key=lambda x: -x[1]['indicacoes'])
-    return render_template('index.html', obras=obras)
+    maior = obras[0][1]['indicacoes'] if obras else 1
+    return render_template('index.html', obras=obras, maior=maior)
 
 # Upload de .xlsx
 @app.route('/upload', methods=['GET', 'POST'])
@@ -81,18 +80,18 @@ def upload():
             wb = load_workbook(path)
             ws = wb.active
 
-            nomes = []
+            blocos = []
             for row in ws.iter_rows(min_col=1, max_col=1, values_only=True):
                 valor = row[0]
                 if valor is None:
-                    if nomes:
-                        adicionar_indicacao(nomes, carregar_dados())
-                        nomes = []
+                    if blocos:
+                        adicionar_indicacao(blocos, carregar_dados())
+                        blocos = []
                 else:
-                    nomes.append(str(valor))
+                    blocos.append(str(valor))
 
-            if nomes:
-                adicionar_indicacao(nomes, carregar_dados())
+            if blocos:
+                adicionar_indicacao(blocos, carregar_dados())
 
             return redirect(url_for('index'))
     return render_template('upload.html')
@@ -101,16 +100,16 @@ def upload():
 @app.route('/adicionar', methods=['POST'])
 def adicionar():
     texto = request.form.get('novas_obras', '')
-    nomes = texto.strip().splitlines()
-    adicionar_indicacao(nomes, carregar_dados())
+    lista_obras = texto.strip().splitlines()
+    adicionar_indicacao(lista_obras, carregar_dados())
     return redirect(url_for('index'))
 
-# Atualiza status
-@app.route('/atualizar_status/<obra>/<novo_status>', methods=['POST'])
-def atualizar_status(obra, novo_status):
+# Remover obra
+@app.route('/excluir/<obra>', methods=['POST'])
+def excluir(obra):
     dados = carregar_dados()
     if obra in dados:
-        dados[obra]['status'] = novo_status
+        del dados[obra]
         salvar_dados(dados)
     return redirect(url_for('index'))
 
