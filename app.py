@@ -28,7 +28,8 @@ def carregar_dados():
 def salvar_dados(dados):
     with open(DADOS_PATH, 'w', encoding='utf-8') as f:
         json.dump(dados, f, indent=2, ensure_ascii=False)
-
+        
+# Normaliza nomes para comparação
 def normalizar_nome(nome):
     nome = nome.lower().strip()
     nome = nome.replace("***", "").replace("...", "").replace("---", "")

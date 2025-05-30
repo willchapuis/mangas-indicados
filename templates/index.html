@@ -15,6 +15,10 @@
       <button type="submit">Adicionar</button>
     </form>
 
+    <div class="links">
+      <a href="{{ url_for('upload') }}">Ir para Upload</a>
+    </div>
+
     <!-- Lista de obras -->
     <div class="lista-obras">
       {% if obras %}
@@ -22,13 +26,20 @@
         {% for obra, info in obras %}
           {% set porcentagem = (info['indicacoes'] / max_indicacoes * 100) | round(2) %}
           <div class="obra">
-            <div class="obra-info">
-              <strong>{{ obra }}</strong> — {{ info['indicacoes'] }} indicação(ões)
-            </div>
-            <div class="barra-container">
-              <!-- Evita style direto no HTML (solução apenas estética) -->
-              <div class="barra" data-percent="{{ porcentagem }}"></div>
-
+            <!-- Linha com nome, barra e botão -->
+            <div class="obra-linha">
+              <div class="obra-info">
+                <strong>{{ obra }}</strong> — {{ info['indicacoes'] }} indicação(ões)
+              </div>
+              <div class="barra-container">
+                <!-- Evita style direto no HTML (solução apenas estética) -->
+                <div class="barra" data-percent="{{ porcentagem }}"></div>
+              </div>
+              <!-- Evita JS inline -->
+              <form action="{{ url_for('excluir', obra=obra) }}" method="POST" class="form-excluir"
+                    data-obra="{{ obra }}" data-indicacoes="{{ info['indicacoes'] }}">
+                <button class="btn-excluir" type="submit">Excluir</button>
+              </form>
               <!-- E então no script -->
               <script>
                 document.querySelectorAll('.barra').forEach(barra => {
@@ -37,11 +48,6 @@
                 });
               </script>
             </div>
-            <!-- Evita JS inline -->
-            <form action="{{ url_for('excluir', obra=obra) }}" method="POST" class="form-excluir"
-                  data-obra="{{ obra }}" data-indicacoes="{{ info['indicacoes'] }}">
-              <button class="btn-excluir" type="submit">Excluir</button>
-            </form>
 
             <script>
               document.querySelectorAll('.form-excluir').forEach(form => {
@@ -58,10 +64,6 @@
       {% else %}
         <p>Nenhuma obra cadastrada ainda.</p>
       {% endif %}
-    </div>
-
-    <div class="links">
-      <a href="{{ url_for('upload') }}">Ir para Upload</a>
     </div>
   </div>
 

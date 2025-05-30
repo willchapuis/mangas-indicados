@@ -1,3 +1,8 @@
+* {
+    box-sizing: border-box;
+}
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -6,12 +11,12 @@ body {
 }
 
 .container {
-    max-width: 800px;
-    margin: auto;
+    max-width: 1200px;
+    margin: 0 auto;
     background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 8px 2px 16px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -21,11 +26,13 @@ h1 {
 
 textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     resize: vertical;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
+    text-align: center;
+    box-sizing: border-box; /* Reforço local, mas com * já cobre */
 }
 
 button {
@@ -39,8 +46,26 @@ button {
     transition: background-color 0.3s ease;
 }
 
+submit {
+    text-align: center;
+}
+
 button:hover {
     background-color: #45a049;
+}
+
+.links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.links a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
 }
 
 .btn-excluir {
@@ -64,42 +89,75 @@ button:hover {
 
 .obra {
     background-color: #f9f9f9;
-    padding: 15px;
     border-radius: 8px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
 }
 
+.obra-linha {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 0px 8px; /* alterado: inclui padding horizontal */
+}
+
 .obra-info {
+    flex-basis: 40%;
+    flex-shrink: 0;
+    flex-grow: 0;
+    font-size: 1rem;
+    /* max-width: 70%; */
+    /* flex-grow: 1;
     font-size: 1.1rem;
-    margin-bottom: 8px;
+    margin-bottom: 8px; */
 }
 
 .barra-container {
-    background-color: #ddd;
-    height: 20px;
-    border-radius: 10px;
+    flex-basis: 40%;
+    flex-shrink: 0;
+    flex-grow: 0;
+    /* width: 100%; */
+    background-color: #f0f0f0;
+    height: 8px;
+    border-radius: 4px;
+    margin-top: 4px;
+    /* background-color: #ddd; */
+    /* height: 20px; */
+    /* border-radius: 10px; */
     overflow: hidden;
-    margin-bottom: 8px;
+    position: relative;
+    /* margin-bottom: 8px; */
 }
 
 .barra {
-    background-color: #3498db;
+    /* background-color: #3498db; */
     height: 100%;
+    background-color: #4caf50;
+    width: 0%;
     transition: width 0.5s ease;
+    border-radius: 4px;
 }
 
-.links {
-    text-align: center;
-    margin-top: 20px;
+.form-excluir {
+    flex-basis: 20%;
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px; /* isso "afasta" da direita */
 }
 
-.links a {
-    color: #3498db;
-    text-decoration: none;
+.btn-excluir {
+    padding: 6px 12px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.links a:hover {
-    text-decoration: underline;
+.btn-excluir:hover {
+    background-color: #c0392b;
 }
 
 /* Responsividade */
