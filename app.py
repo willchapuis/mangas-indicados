@@ -105,6 +105,23 @@ def adicionar():
     adicionar_indicacao(lista_obras, carregar_dados())
     return redirect(url_for('index'))
 
+# Editar obra
+@app.route("/editar/<obra>", methods=["GET", "POST"])
+def editar(obra):
+    dados = carregar_dados()
+
+    if request.method == "POST":
+        novo_nome = request.form.get("novo_nome", "").strip()
+        if novo_nome:
+            # Move os dados da obra antiga para a nova (caso mude o nome)
+            if obra in dados:
+                dados[novo_nome] = dados.pop(obra)
+                salvar_dados(dados)
+        return redirect(url_for("index"))
+
+    return render_template("editar.html", obra=obra)
+
+
 # Remover obra
 @app.route('/excluir/<obra>', methods=['POST'])
 def excluir(obra):
