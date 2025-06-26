@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registro de Obras Literárias</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+  </head>
+  <body>
+    <nav class="container-fluid">
+      <ul>
+        <li><strong>Obras Literárias</strong></li>
+      </ul>
+      <ul>
+        <li><a href="indicacoes.html">Indicações</a></li>
+        <li><a href="nova-indicacao.html">Nova Indicação</a></li>
+        <li><a href="obras.html">Obras Acompanhadas</a></li>
+        <li><a href="nova-obra.html" role="button">Nova Obra</a></li>
+      </ul>
+    </nav>
+
+    <main class="container">
+      <div class="grid">
+        <section>
+          <hgroup>
+            <h2>Bem-vindo ao seu Registro de Obras</h2>
+            <h3>Acompanhe, registre e organize suas leituras</h3>
+          </hgroup>
+          <p>Este projeto pessoal permite que você mantenha um controle completo sobre suas leituras, indicações e atualizações de obras orientais como mangás, manhwas e manhuas. Use os links acima para navegar entre as páginas.</p>
+          <figure>
+            <img src="https://images.unsplash.com/photo-1614849963785-c2586c3b41c5?w=1200" alt="Pessoa lendo mangá" loading="lazy" style="max-width:100%;" />
+            <!-- <figcaption>
+              <a href="https://unsplash.com/photos/66d1773070c1" target="_blank">Imagem por Unsplash</a>
+            </figcaption> -->
+          </figure>
+          <h3>Como funciona?</h3>
+          <p>Você pode visualizar todas as indicações recebidas, cadastrar novas, acompanhar obras em andamento e registrar detalhes sobre cada leitura.</p>
+          <h3>Foco em autonomia</h3>
+          <p>O site funciona localmente, com estrutura pensada para expansão futura via React ou Django. Os dados podem ser integrados via arquivos ou backend leve.</p>
+        </section>
+      </div>
+    </main>
+
+    <section aria-label="Inscrição">
+      <div class="container">
+        <article>
+          <hgroup>
+            <h2>Simulação de Newsletter</h2>
+            <h3>Insira seus dados para testar o formulário</h3>
+          </hgroup>
+          <form class="grid">
+            <input type="text" id="firstname" name="firstname" placeholder="Seu nome" aria-label="Nome" required />
+            <input type="email" id="email" name="email" placeholder="seu@email.com" aria-label="Email" required />
+            <button type="submit" onclick="event.preventDefault()">Enviar</button>
+          </form>
+        </article>
+      </div>
+    </section>
+
+    <footer class="container">
+      <small>
+        <a href="#">Termos</a> • <a href="#">Privacidade</a>
+      </small>
+    </footer>
+  </body>
+</html>
