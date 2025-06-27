@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nova Indicação</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+</head>
+<body>
+  <nav class="container-fluid">
+    <ul>
+      <li><strong>Obras Literárias</strong></li>
+    </ul>
+    <ul>
+      <li><a href="new-index.html">Home</a></li>
+      <li><a href="new-indicacoes.html">Indicações</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section>
+      <hgroup>
+        <h2>Nova Indicação</h2>
+        <h3>Informe o nome da obra indicada</h3>
+      </hgroup>
+      <form onsubmit="handleIndicacao(event)">
+        <label>Nome da Obra
+          <input type="text" name="obra" placeholder="Ex: Solo Leveling" required />
+        </label>
+        <input type="hidden" id="dataEnvio" name="dataEnvio" />
+        <button type="submit">Salvar Indicação</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container">
+    <small>
+      <a href="#">Termos</a> • <a href="#">Privacidade</a>
+    </small>
+  </footer>
+
+  <script>
+    function handleIndicacao(event) {
+      event.preventDefault();
+      const form = event.target;
+      const nomeObra = form.obra.value.trim();
+      const dataAtual = new Date().toISOString().split('T')[0];
+      document.getElementById("dataEnvio").value = dataAtual;
+
+      // Simulação de gravação: você pode usar isso para manipular localStorage ou JSON depois
+      alert("Indicação registrada para: " + nomeObra + "\nData de envio: " + dataAtual + "\n\n(A lógica de primeira/última indicação e contagem será aplicada ao salvar os dados.)");
+
+      form.reset();
+      document.getElementById("dataEnvio").value = "";
+    }
+  </script>
+</body>
+</html>
