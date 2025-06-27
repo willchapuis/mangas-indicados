@@ -13,6 +13,15 @@
       td.sem-quebra {
         white-space: nowrap;
       }
+      .container-fluid {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+      @media (min-width: 1200px) {
+        .table-wrapper {
+          overflow-x: visible !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -26,14 +35,14 @@
       </ul>
     </nav>
 
-    <main class="container">
+    <main class="container-fluid">
       <div class="grid">
         <section>
           <hgroup>
             <h2>Obras Acompanhadas</h2>
             <h3>Seu registro pessoal de leituras e acompanhamentos</h3>
           </hgroup>
-          <div style="overflow-x:auto">
+          <div class="table-wrapper" style="overflow-x:auto">
             <table>
               <thead>
                 <tr>
@@ -135,7 +144,7 @@
       </div>
     </main>
 
-    <footer class="container">
+    <footer class="container-fluid">
       <small>
         <a href="#">Termos</a> • <a href="#">Privacidade</a>
       </small>
