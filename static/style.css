@@ -1,4 +1,27 @@
-/* Reset e base inicial */
+/* ==============================
+   Variáveis Globais (root)
+   ============================== */
+:root {
+  --cor-fundo: #f4f4f4;
+  --cor-texto: #333;
+  --cor-destaque: #333;
+  --cor-destaque-hover: #555;
+  --cor-clara: #fff;
+  --cor-borda: #ccc;
+  --cor-tabela-cabecalho: #f0f0f0;
+  --cor-preview-bg: #f9f9f9;
+
+  --espaco-padrao: 1rem;
+  --espaco-grande: 2rem;
+  --largura-max: 1200px;
+
+  --fonte-principal: Arial, sans-serif;
+  --tamanho-fonte-base: 1rem;
+}
+
+/* ==============================
+   Reset & Base
+   ============================== */
 * {
   margin: 0;
   padding: 0;
@@ -6,29 +29,50 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: var(--fonte-principal);
   line-height: 1.6;
-  background-color: #f4f4f4;
-  padding: 1rem;
-  color: #333;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  padding: var(--espaco-padrao);
 }
 
-/* Navegação */
+/* ==============================
+   Containers e Layout
+   ============================== */
+.container,
+.container-fluid {
+  max-width: var(--largura-max);
+  margin: auto;
+}
+
+.container-fluid {
+  padding-left: var(--espaco-grande);
+  padding-right: var(--espaco-grande);
+}
+
+.grid {
+  display: grid;
+  gap: var(--espaco-padrao);
+}
+
+/* ==============================
+   Navegação
+   ============================== */
 nav {
   display: flex;
   justify-content: space-between;
-  background-color: #333;
-  padding: 1rem;
+  background-color: var(--cor-destaque);
+  padding: var(--espaco-padrao);
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  gap: 1rem;
+  gap: var(--espaco-padrao);
 }
 
 nav a {
-  color: #fff;
+  color: var(--cor-clara);
   text-decoration: none;
 }
 
@@ -36,40 +80,89 @@ nav a:hover {
   text-decoration: underline;
 }
 
-/* Container e grid */
-.container, .container-fluid {
-  max-width: 1200px;
-  margin: auto;
-}
-
-.grid {
-  display: grid;
-  gap: 1rem;
-}
-
-/* Formulário */
+/* ==============================
+   Formulários
+   ============================== */
 form input,
-form button {
+form button,
+form select {
   padding: 0.5rem;
-  font-size: 1rem;
+  font-size: var(--tamanho-fonte-base);
 }
 
 form button {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--cor-destaque);
+  color: var(--cor-clara);
   border: none;
   cursor: pointer;
 }
 
 form button:hover {
-  background-color: #555;
+  background-color: var(--cor-destaque-hover);
 }
 
-/* Footer */
+/* ==============================
+   Tabelas
+   ============================== */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+@media (min-width: 1200px) {
+  .table-wrapper {
+    overflow-x: visible !important;
+  }
+}
+
+table {
+  width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 0.75rem;
+  border: 1px solid var(--cor-borda);
+  text-align: left;
+}
+
+table thead {
+  background-color: var(--cor-tabela-cabecalho);
+}
+
+/* Para células que não devem quebrar */
+td.sem-quebra {
+  white-space: nowrap;
+}
+
+/* ==============================
+   Rodapé
+   ============================== */
 footer {
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #ccc;
+  margin-top: var(--espaco-grande);
+  padding-top: var(--espaco-padrao);
+  border-top: 1px solid var(--cor-borda);
   text-align: center;
   font-size: 0.9rem;
+}
+
+/* ==============================
+   Formato (Nova Obra)
+   ============================== */
+.format-btns button {
+  margin-right: 0.5rem;
+}
+
+.format-btns button.active {
+  background-color: var(--cor-destaque);
+  color: var(--cor-clara);
+}
+
+.format-preview {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 0.5rem;
+  background: var(--cor-preview-bg);
 }

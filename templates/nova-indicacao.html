@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nova Indicação</title>
+  <link rel="stylesheet" href="../static/style.css" />
+</head>
+<body>
+  <nav class="container-fluid">
+    <ul>
+      <li><strong>Obras Literárias</strong></li>
+    </ul>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="indicacoes.html">Indicações</a></li>
+    </ul>
+  </nav>
+
+  <main class="container-fluid">
+    <div class="grid">
+      <section>
+        <hgroup>
+          <h2>Nova Indicação</h2>
+          <h3>Informe o nome da obra indicada</h3>
+        </hgroup>
+
+        <form onsubmit="enviarFormulario(event)">
+          <label>Nome da Obra
+            <input type="text" id="obra" name="obra" placeholder="Ex: Solo Leveling" required />
+          </label>
+
+          <input type="hidden" id="dataEnvio" name="dataEnvio" />
+
+          <button type="submit">Salvar Indicação</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="container-fluid">
+    <small>
+      <a href="#">Termos</a> • <a href="#">Privacidade</a>
+    </small>
+  </footer>
+
+  <script src="../scripts/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nova Obra</title>
+  <link rel="stylesheet" href="../static/style.css" />
+</head>
+<body>
+  <nav class="container-fluid">
+    <ul>
+      <li><strong>Obras Literárias</strong></li>
+    </ul>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="obras.html">Obras Acompanhadas</a></li>
+    </ul>
+  </nav>
+
+  <main class="container-fluid">
+    <div class="grid">
+      <section>
+        <hgroup>
+          <h2>Nova Obra</h2>
+          <h3>Preencha os dados para registrar uma nova obra</h3>
+        </hgroup>
+
+        <form onsubmit="enviarFormulario(event)">
+          <label>Nome da Obra
+            <input type="text" id="obra" name="obra" placeholder="Nome da Obra" required />
+          </label>
+
+          <label>Status
+            <select name="status" required>
+              <option value="⭐">⭐ Favorito</option>
+              <option value="✅">✅ Acompanhando</option>
+              <option value="❌">❌ Parado</option>
+              <option value="🔷">🔷 Finalizado</option>
+              <option value="😭">😭 Cancelada</option>
+              <option value="🤔">🤔 Interesse</option>
+              <option value="😕">😕 Baixo interesse</option>
+              <option value="😒">😒 Descontinuada</option>
+            </select>
+          </label>
+
+          <fieldset>
+            <legend>Formato (ordem de seleção importa)</legend>
+            <div class="format-btns">
+              <button type="button" onclick="alternarFormatoDeObra(this, '▶️')">▶️</button>
+              <button type="button" onclick="alternarFormatoDeObra(this, '📖')">📖</button>
+              <button type="button" onclick="alternarFormatoDeObra(this, '💻')">💻</button>
+              <button type="button" onclick="alternarFormatoDeObra(this, '📺')">📺</button>
+            </div>
+            <div class="format-preview" id="formatPreview">(vazio)</div>
+            <input type="hidden" name="formato" id="formato" />
+          </fieldset>
+
+          <label>Capítulo
+            <input type="text" id="capitulo" name="capitulo" placeholder="Capítulo atual" />
+          </label>
+
+          <label>Minutagem
+            <input type="text" id="minutagem" name="minutagem" placeholder="Ex: 2h47m" />
+          </label>
+
+          <label>Duração total
+            <input type="text" id="duracao" name="duracao" placeholder="Ex: 7h00m" />
+          </label>
+
+          <label>Capítulo Assistido
+            <input type="text" id="cap_assistido" name="cap_assistido" placeholder="Ex: 1-22" />
+          </label>
+
+          <label>Texto do Canal YouTube
+            <input type="text" id="canal_texto" name="canal_texto" placeholder="Ex: Cronosfera" />
+          </label>
+
+          <label>Link do Canal (URL)
+            <input type="url" id="canal_link" name="canal_link" placeholder="https://..." />
+          </label>
+
+          <label>Texto do Link de Leitura/Loja
+            <input type="text" id="link_texto" name="link_texto" placeholder="Ex: Amazon" />
+          </label>
+
+          <label>URL de Leitura/Loja
+            <input type="url" id="link_url" name="link_url" placeholder="https://..." />
+          </label>
+
+          <label>Idioma
+            <select name="idioma">
+              <option value="">--</option>
+              <option value="PT-BR">PT-BR</option>
+              <option value="ENG">ENG</option>
+            </select>
+          </label>
+
+          <label>Data assistido/lido
+            <input type="date" id="dt_ass" name="dt_ass" />
+          </label>
+
+          <label>Data de lançamento (Dt. Att.)
+            <input type="date" id="dt_att" name="dt_att" />
+          </label>
+
+          <input type="hidden" id="dataEnvio" name="dataEnvio" />
+
+          <button type="submit">Salvar Obra</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="container-fluid">
+    <small>
+      <a href="#">Termos</a> • <a href="#">Privacidade</a>
+    </small>
+  </footer>
+
+  <script src="../scripts/script.js"></script>
+</body>
+</html>
